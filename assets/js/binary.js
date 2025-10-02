@@ -1,4 +1,4 @@
-// meta={"simUrl":"/simulator.html","cdnUrl":"/","version":"0.0.3","target":"arcade","targetVersion":"2.0.3","repo":"the-code-zone/arcade-minimap"}
+// meta={"simUrl":"/simulator.html","cdnUrl":"/","version":"0.0.4","target":"arcade","targetVersion":"2.0.3","repo":"the-code-zone/arcade-minimap"}
 // total=1243357 new=5.86% cached=88.48% other=5.66%
 (function (ectx) {
 'use strict';
@@ -429,7 +429,7 @@ const pxsim_pxtrt = pxsim.pxtrt;
 const pxsim_numops = pxsim.numops;
 
 
-function _main___P30129(s) {
+function _main___P30579(s) {
 let r0 = s.r0, step = s.pc;
 s.pc = -1;
 
@@ -831,18 +831,18 @@ switch (step) {
     s.callLocIdx = 63; s.pc = 37; return s.tmp_0;
   case 37:
     r0 = s.retval;
-    globals.MiniMapKind___29737 = (r0);
+    globals.MiniMapKind___30185 = (r0);
     r0 = undefined;
     return leave(s, r0)
   default: oops()
 } } }
-_main___P30129.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
-_main___P30129.continuations = [  ]
+_main___P30579.info = {"start":0,"length":0,"line":0,"column":0,"endLine":0,"endColumn":0,"fileName":"main.ts","functionName":"<main>","argumentNames":[]}
+_main___P30579.continuations = [  ]
 
-function _main___P30129_mk(s) {
+function _main___P30579_mk(s) {
     checkStack(s.depth);
     return {
-        parent: s, fn: _main___P30129, depth: s.depth + 1,
+        parent: s, fn: _main___P30579, depth: s.depth + 1,
         pc: 0, retval: undefined, r0: undefined, overwrittenPC: false, lambdaArgs: null,
   tmp_0: undefined,
   tmp_1: undefined,
@@ -42357,7 +42357,7 @@ const sprites_BaseSpriteSayRenderer__C2260_VT = mkVTable({
   },
 });
 
-const breakpoints = setupDebugger(1, ["MiniMapKind___29737"])
+const breakpoints = setupDebugger(1, ["MiniMapKind___30185"])
 
-return _main___P30129
+return _main___P30579
 })
