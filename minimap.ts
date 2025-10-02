@@ -121,7 +121,7 @@ namespace minimap {
     //% blockId="createMinimapSprite"
     //% group="Minimap"
     //% weight=70
-    export function createMinimapSprite(scale: MinimapScale = MinimapScale.Half, borderWidth = 0, borderColor = 0) {
+    export function createMinimapSprite(scale: MinimapScale = MinimapScale.Half, borderWidth = 0, borderColor = 0): Sprite {
         let minimap = getMinimapObject(scale, borderWidth, borderColor);
         minimapSprite = sprites.create(minimap.image, MiniMapKind);
         minimapSprite.data = minimap;
@@ -134,23 +134,36 @@ namespace minimap {
     //% sprite.shadow=variables_get
     //% group="Sprites"
     //% weight=70
-    export function addSpriteToUpdateList(sprite: Sprite, spriteScale = MinimapSpriteScale.MinimapScale) {
+    export function addSpriteToUpdateList(sprite: Sprite, spriteScale = MinimapSpriteScale.MinimapScale): void {
         let updateSprite: IUpdateSprite = {sprite: sprite, scale: spriteScale};
         spritesToUpdate.push(updateSprite);
+    }
+
+    //% block="remove $sprite from update list"
+    //% blockId="removeSpriteFromUpdateList"
+    //% sprite.defl=my_sprite
+    //% sprite.shadow=variables_get
+    //% group="Sprites"
+    //% weight=65
+    export function removeSpriteFromUpdateList(sprite: Sprite): void {
+        spritesToUpdate = spritesToUpdate.filter(u => u.sprite !== sprite);
     }
 
     //% block="update minimap every $updateInterval ms"
     //% blockId="updateMiniMapEvery"
     //% group="Sprites"
     //% weight=60
-    export function updateMiniMapEvery(updateInterval: number){
+    export function updateMiniMapEvery(updateInterval: number): void {
         game.onUpdateInterval(updateInterval, () => {
             let oldMM = minimapSprite.data;
             let newMM = getMinimapObject(oldMM.scale, oldMM.borderWidth, oldMM.borderColor);
             minimapSprite.data = newMM;
-            for (let updateSprite of spritesToUpdate) { 
+            for (let updateSprite of spritesToUpdate.slice()) { 
                 if (updateSprite.sprite) {
                     includeSprite(minimapSprite.data, updateSprite.sprite, updateSprite.scale);
+                }
+                else {
+                    removeSpriteFromUpdateList(updateSprite.sprite);
                 }
             }
             minimapSprite.setImage(newMM.image);
