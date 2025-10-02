@@ -149,6 +149,10 @@ namespace minimap {
         spritesToUpdate = spritesToUpdate.filter(u => u.sprite !== sprite);
     }
 
+    function isDestroyed(sprite: Sprite): boolean {
+        return !sprite || !!(sprite.flags & sprites.Flag.Destroyed);
+    }
+
     //% block="update minimap every $updateInterval ms"
     //% blockId="updateMiniMapEvery"
     //% group="Sprites"
@@ -159,7 +163,7 @@ namespace minimap {
             let newMM = getMinimapObject(oldMM.scale, oldMM.borderWidth, oldMM.borderColor);
             minimapSprite.data = newMM;
             for (let updateSprite of spritesToUpdate.slice()) { 
-                if (updateSprite.sprite) {
+                if (isDestroyed(updateSprite.sprite)) {
                     includeSprite(minimapSprite.data, updateSprite.sprite, updateSprite.scale);
                 }
                 else {
