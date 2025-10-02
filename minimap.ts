@@ -163,7 +163,7 @@ namespace minimap {
             let newMM = getMinimapObject(oldMM.scale, oldMM.borderWidth, oldMM.borderColor);
             minimapSprite.data = newMM;
             for (let updateSprite of spritesToUpdate.slice()) { 
-                if (isDestroyed(updateSprite.sprite)) {
+                if (!isDestroyed(updateSprite.sprite)) {
                     includeSprite(minimapSprite.data, updateSprite.sprite, updateSprite.scale);
                 }
                 else {
