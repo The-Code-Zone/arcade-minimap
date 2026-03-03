@@ -50,7 +50,7 @@ namespace minimap {
     //% borderWidth.defl=2
     //% borderColor.shadow=colorindexpicker
     //% blockSetVariable=my_minimap
-    //% group="Minimap" weight=100 blockGap=8
+    //% group="Minimap" weight=99 blockGap=8
     export function getMinimapObject(scale: MinimapScale = MinimapScale.Half, borderWidth = 0, borderColor = 0): Minimap {
         const tilemap = game.currentScene().tileMap;
 
@@ -120,7 +120,8 @@ namespace minimap {
     //% block="create minimap sprite size $scale || and border $borderwidth $borderColor"
     //% blockId="createMinimapSprite"
     //% group="Minimap"
-    //% weight=70
+    //% blockSetVariable=my_minimap
+    //% weight=100
     export function createMinimapSprite(scale: MinimapScale = MinimapScale.Half, borderWidth = 0, borderColor = 0): Sprite {
         let minimap = getMinimapObject(scale, borderWidth, borderColor);
         minimapSprite = sprites.create(minimap.image, MiniMapKind);
@@ -162,6 +163,9 @@ namespace minimap {
             let oldMM = minimapSprite.data;
             let newMM = getMinimapObject(oldMM.scale, oldMM.borderWidth, oldMM.borderColor);
             minimapSprite.data = newMM;
+            if (spritesToUpdate.length < 1) {
+                return;
+            }
             for (let updateSprite of spritesToUpdate.slice()) { 
                 if (!isDestroyed(updateSprite.sprite)) {
                     includeSprite(minimapSprite.data, updateSprite.sprite, updateSprite.scale);
